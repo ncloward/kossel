@@ -21,7 +21,7 @@ module screw_socket() {
 module screw_socket_cone() {
   union() {
     screw_socket();
-    scale([1, 1, -1]) cylinder(r1=4, r2=7, h=4);
+    scale([1, 6, -1]) cylinder(r=4, h=4);
   }
 }
 
