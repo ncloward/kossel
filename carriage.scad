@@ -47,7 +47,7 @@ module carriage() {
         translate([26.5, -9, 12.5]) rotate([30, 40, 30])
           cube([40, 40, 20], center=true);
         translate([13, -13, 0])
-          cylinder(r=m3_wide_radius+1.5, h=100, center=true, $fn=12);
+          cylinder(r=m4_wide_radius+1.5, h=100, center=true, $fn=12);
       }
       difference() {
         translate([-12.5, 5, horn_thickness/2+1])
@@ -55,7 +55,7 @@ module carriage() {
         translate([-26.5, -9, 12.5]) rotate([30, -40, -30])
           cube([40, 40, 20], center=true);
         translate([-13, -13, 0])
-          cylinder(r=m3_wide_radius+1.5, h=100, center=true, $fn=12);
+          cylinder(r=m4_wide_radius+1.5, h=100, center=true, $fn=12);
       }
 
       // Belt clamps.
@@ -83,7 +83,7 @@ module carriage() {
     for (x = [-13, 13]) {
       for (y = [-13, 13]) {
         translate([x, y, thickness]) #
-          cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
+          cylinder(r=m4_wide_radius, h=30, center=true, $fn=12);
       }
     }
 
