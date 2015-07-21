@@ -13,13 +13,13 @@ m3_wide_radius = m3_major/2 + extra_radius + 0.2;
 
 // OD = outside diameter, corner to corner.
 m4_nut_od = 6.1;
-m4_nut_radius = m3_nut_od/2 + 0.2 + extra_radius;
+m4_nut_radius = m4_nut_od/2 + 0.2 + extra_radius;
 m4_washer_radius = 4.5 + extra_radius;
 
 // Major diameter of metric 4mm thread.
 m4_major = 3.85;
-m4_radius = m3_major/2 + extra_radius;
-m4_wide_radius = m3_major/2 + extra_radius + 0.2;
+m4_radius = m4_major/2 + extra_radius;
+m4_wide_radius = m4_major/2 + extra_radius + 0.2;
 
 // NEMA17 stepper motors.
 motor_shaft_diameter = 5;
