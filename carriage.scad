@@ -95,10 +95,11 @@ module carriage() {
 
     // Lock nuts for ball joints.
     for (x = [-1, 1]) {
-      scale([x, 1, 1]) intersection() {
-        translate([horn_x - 3.7, 19, horn_thickness/2]) rotate([90, 0, -90])
-          cylinder(r1=m3_nut_radius, r2=m3_nut_radius+0.5, h=8 + 7,
-              center=true, $fn=6);
+      scale([x, 1, 1]) # hull() {
+        translate([horn_x - 3.7 + 1.9, 19, horn_thickness/2]) rotate([90, 0, -90])
+          cylinder(r1=m3_nut_radius, r2=m3_nut_radius, h=m3_nut_thickness*1.5, center=true, $fn=6);
+        translate([horn_x - 3.7 + 1.9, 24, horn_thickness/2])
+          cube([m3_nut_thickness*1.5, 10, m3_nut_radius * 2 -.9], center=true);
       }
     }
   }
