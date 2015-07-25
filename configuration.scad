@@ -15,6 +15,7 @@ m3_wide_radius = m3_major/2 + extra_radius + 0.2;
 // OD = outside diameter, corner to corner.
 m4_nut_od = 7.1;
 m4_nut_radius = m4_nut_od/2 + 0.2 + extra_radius;
+m4_thickness = 3.82 + extra_radius;
 m4_washer_radius = 4.5 + extra_radius;
 
 // Major diameter of metric 3mm thread.

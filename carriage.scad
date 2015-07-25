@@ -6,15 +6,15 @@ belt_thickness = 1.0 - 0.05;       // slightly less than actual belt thickness f
 belt_pitch = 2.0;                  // tooth pitch on the belt, 2 for GT2 (mm)
 tooth_radius = 0.8;                // belt tooth radius, 0.8 for GT2 (mm)
 
-separation = 47;
-thickness = 6;
+separation = 40;
+thickness = 3;
 
-horn_thickness = 13;
+horn_thickness = 9;
 horn_x = 15;
 
 belt_width = 5;
 belt_x = 5.6;
-belt_z = 7;
+belt_z = 4;
 corner_radius = 3.5;
 
 module carriage() {
@@ -35,7 +35,7 @@ module carriage() {
         scale([x, 1, 1]) intersection() {
           translate([0, 17, horn_thickness/2])
             cube([separation, 21, horn_thickness], center=true);
-          translate([horn_x, 19, horn_thickness/2]) rotate([0, 90, 0])
+          translate([horn_x, 21, horn_thickness/2]) rotate([0, 90, 0])
             cylinder(r1=14, r2=2.5, h=separation/2-horn_x);
         }
       }
@@ -44,18 +44,14 @@ module carriage() {
       difference() {
         translate([11.5, 5, horn_thickness/2+1])
           cube([11, 45, horn_thickness-2], center=true);
-        translate([26.5, -9, 12.5]) rotate([30, 40, 30])
-          cube([40, 40, 20], center=true);
-        translate([13, -13, 0])
-          cylinder(r=m4_wide_radius+1.5, h=100, center=true, $fn=12);
+        translate([25, -9, 11.5]) rotate([28, 30, 34])
+          cube([50, 50, 20], center=true);
       }
       difference() {
         translate([-12.5, 5, horn_thickness/2+1])
           cube([9, 45, horn_thickness-2], center=true);
-        translate([-26.5, -9, 12.5]) rotate([30, -40, -30])
-          cube([40, 40, 20], center=true);
-        translate([-13, -13, 0])
-          cylinder(r=m4_wide_radius+1.5, h=100, center=true, $fn=12);
+        translate([-25, -9, 11.5]) rotate([28, -30, -34])
+          cube([50, 50, 20], center=true);
       }
 
       // Belt clamps.
@@ -84,19 +80,21 @@ module carriage() {
       for (y = [-13, 13]) {
         translate([x, y, thickness]) #
           cylinder(r=m4_wide_radius, h=30, center=true, $fn=12);
+        translate([x, y, horn_thickness - m4_thickness / 2])
+          cylinder(r=m4_wide_radius+1.5, h=m4_thickness + 1, center=true, $fn=12);
       }
     }
 
     // Screws for ball joints.
-    translate([-30, 19, horn_thickness/2]) rotate([0, 90, 0]) #
+    translate([-30, 21, horn_thickness/2]) rotate([0, 90, 0]) #
       cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
-    translate([30, 19, horn_thickness/2]) rotate([0, 90, 0]) #
+    translate([30, 21, horn_thickness/2]) rotate([0, 90, 0]) #
       cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
 
     // Lock nuts for ball joints.
     for (x = [-1, 1]) {
       scale([x, 1, 1]) # hull() {
-        translate([horn_x - 3.7 + 1.9, 19, horn_thickness/2]) rotate([90, 0, -90])
+        translate([horn_x - 3.7 + 1.9, 21, horn_thickness/2]) rotate([90, 0, -90])
           cylinder(r1=m3_nut_radius, r2=m3_nut_radius, h=m3_nut_thickness*1.5, center=true, $fn=6);
         translate([horn_x - 3.7 + 1.9, 24, horn_thickness/2])
           cube([m3_nut_thickness*1.5, 10, m3_nut_radius * 2 -.9], center=true);
