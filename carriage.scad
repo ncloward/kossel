@@ -80,8 +80,8 @@ module carriage() {
       for (y = [-13, 13]) {
         translate([x, y, thickness]) #
           cylinder(r=m4_wide_radius, h=30, center=true, $fn=12);
-        translate([x, y, horn_thickness - m4_thickness / 2])
-          cylinder(r=m4_wide_radius+1.5, h=m4_thickness + 1, center=true, $fn=12);
+        translate([x, y, horn_thickness - (3.5 / 2) + .5])
+          cylinder(r=m4_wide_radius+1.5, h=3.5 + 1, center=true, $fn=12);
       }
     }
 
