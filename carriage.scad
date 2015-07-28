@@ -85,6 +85,20 @@ module carriage() {
       }
     }
 
+    hull() {
+      translate([13, 13, horn_thickness - (3.5 / 2) + .5])
+        cylinder(r=m4_wide_radius+1.5, h=3.5 + 1, center=true, $fn=12);
+      translate([16, 12.2, horn_thickness - (3.5 / 2) + .5]) rotate([0, 0, 75])
+        cube([m4_wide_radius * 2, m4_wide_radius * 2,  4.5], center=true);
+    }
+
+    hull() {
+      translate([-13, 13, horn_thickness - (3.5 / 2) + .5])
+        cylinder(r=m4_wide_radius+1.5, h=3.5 + 1, center=true, $fn=12);
+      translate([-16, 12.2, horn_thickness - (3.5 / 2) + .5]) rotate([0, 0, -75])
+        cube([m4_wide_radius * 2, m4_wide_radius * 2,  4.5], center=true);
+    }
+
     // Screws for ball joints.
     translate([-30, 21, horn_thickness/2]) rotate([0, 90, 0]) #
       cylinder(r=m3_wide_radius, h=30, center=true, $fn=12);
@@ -94,10 +108,10 @@ module carriage() {
     // Lock nuts for ball joints.
     for (x = [-1, 1]) {
       scale([x, 1, 1]) # hull() {
-        translate([horn_x - 3.7 + 1.9, 21, horn_thickness/2]) rotate([90, 0, -90])
-          cylinder(r1=m3_nut_radius, r2=m3_nut_radius, h=m3_nut_thickness*1.5, center=true, $fn=6);
-        translate([horn_x - 3.7 + 1.9, 24, horn_thickness/2])
-          cube([m3_nut_thickness*1.5, 10, m3_nut_radius * 2 -.9], center=true);
+        translate([horn_x - 3.7 + 2.5, 21, horn_thickness/2]) rotate([90, 0, -90])
+          cylinder(r1=m3_nut_radius, r2=m3_nut_radius, h=m3_nut_thickness, center=true, $fn=6);
+        translate([horn_x - 3.7 + 2.5, 25, horn_thickness/2])
+          cube([m3_nut_thickness, 10, m3_nut_radius * 2 -.9], center=true);
       }
     }
   }
