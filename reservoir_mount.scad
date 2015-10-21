@@ -9,7 +9,7 @@ module screw_socket() {
   translate([0, 0, 3.8]) cylinder(r=3.5, h=8);
 }
 
-module reservoir_mount(bottom) {
+module reservoir_mount() {
   difference() {
     hull() {
       translate([0, 0, reservoir_height/8])
@@ -22,15 +22,10 @@ module reservoir_mount(bottom) {
       translate([0, 0, reservoir_height/2 + thickness])
         cylinder(r=reservoir_radius, h=reservoir_height, center=true);
 
-      if(bottom) {
-        translate([0, 0, thickness/2])
-          cylinder(r=reservoir_radius/2, h=thickness+2, center=true);
-      } else {
-        hull() {
-          for (a = [1, -1]) {
-            translate([reservoir_radius/2.5*a, 0, thickness/2])
-              cylinder(r=reservoir_radius/3, h=thickness+2, center=true);
-          }
+      hull() {
+        for (a = [1, -1]) {
+          translate([reservoir_radius/2.5*a, 0, thickness/2])
+            cylinder(r=reservoir_radius/3, h=thickness+2, center=true);
         }
       }
 
@@ -47,7 +42,4 @@ module reservoir_mount(bottom) {
   }
 }
 
-for (a = [1, -1]) {
-  translate([a*(reservoir_radius+5), 0, 0])
-    reservoir_mount(bottom=a > 0);
-}
+reservoir_mount();
