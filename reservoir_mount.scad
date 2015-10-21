@@ -1,8 +1,10 @@
 include <configuration.scad>;
 
-reservoir_radius = 75 / 2;
+reservoir_radius = 75.5 / 2;
 reservoir_height = 75 * 2;
-thickness = 3;
+thickness = 2;
+
+$fn = 128;
 
 module screw_socket() {
   cylinder(r=m3_wide_radius, h=10, center=true);
@@ -39,7 +41,7 @@ module reservoir_mount() {
         }
       }
 
-      translate([0, -reservoir_radius/1.5, -2.3]) scale([0.11, 0.11, 1]) rotate([0, 180, 0])
+      translate([0, -reservoir_radius/1.5, -2.2]) scale([0.14, 0.14, 1]) rotate([0, 180, 0])
         import("logotype.stl");
     }
   }
