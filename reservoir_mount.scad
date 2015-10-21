@@ -38,6 +38,9 @@ module reservoir_mount() {
             # screw_socket();
         }
       }
+
+      translate([0, -reservoir_radius/1.5, -2.3]) scale([0.11, 0.11, 1]) rotate([0, 180, 0])
+        import("logotype.stl");
     }
   }
 }
