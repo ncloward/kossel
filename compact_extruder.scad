@@ -54,7 +54,7 @@ nema17_hole_offsets = [
 ];
 
 // inlet type
-inlet_type = 0; // 0:normal, 1:push-fit
+inlet_type = 1; // 0:normal, 1:push-fit
 
 
 //// filament
@@ -282,7 +282,7 @@ module filament_tunnel()
 				rotate([90, 0, 0])
 					cylinder(r = filament_diameter / 2 + 2 * extra_radius,
 						h = length + 2 * epsilon, center = true, $fn = 16);
-			
+
 			// screw head inlet
 			translate(nema17_hole_offsets[2] - [filament_offset[0], 0, height / 2 + 1.5])
 				sphere(r = m3_head_radius, $fn = 16);
@@ -357,11 +357,11 @@ module idler_608()
 				translate([offset + 10.65 + gap, 0, 0])
 					cube([15, nema17_width + epsilon, height], center = true);
 			}
-			
+
 			// bearing foot enforcement
 			translate([offset + 11 - pre_tension, 0, -height / 2])
 				cylinder(r = 4 - extra_radius + 1, h = height - .5, $fn = 32);
-			
+
 			// spring base enforcement
 			translate([17.15, -nema17_width / 2 + 4, .25])
 				rotate([0, 90, 0])
@@ -373,10 +373,10 @@ module idler_608()
 			{
 				// bearing spare out
 				cylinder(r = 11.5, h = 60, $fn = 32);
-				
+
 				// bearing mount
 				cylinder(r = 4 - extra_radius, h = 7.5, $fn = 32);
-				
+
 				// bearing mount base
 				cylinder(r = 4 - extra_radius + 1, h = 0.5, $fn = 32);
 			}
@@ -408,15 +408,14 @@ module idler_608()
 }
 
 
-
 module compact_extruder()
 {
 	// motor plate
 	nema17_mount();
 
 	// mounting plate
-	translate([0, nema17_width / 2 + base_width / 2, 0])
-		rotate([0, 0, 90])
+	translate([0, -nema17_width / 2 - base_width / 2, 0])
+		rotate([0, 0, -90])
 			frame_mount();
 
 	// filament inlet/outlet
@@ -436,9 +435,12 @@ module compact_extruder()
 }
 
 compact_extruder();
-translate([base_length, 0, 0])
-  compact_extruder();
+/*translate([base_length, 0, 0])*/
+  /*compact_extruder();*/
 /*translate([base_length*2, 0, 0])*/
   /*compact_extruder();*/
 /*translate([base_length*3, 0, 0])*/
   /*compact_extruder();*/
+
+translate([base_length / 2, 0, 0])
+  idler_608();
