@@ -225,8 +225,6 @@ module filament_tunnel()
 			translate([filament_diameter + 1, -nema17_width / 2 + 4, .25])
 				rotate([0, 90, 0])
 					cylinder(r = m3_radius, h = 50, center = false, $fn = 32);
-			translate([filament_diameter + 3, -nema17_width / 2 + 4, 5])
-				cube([2.5 + 3 * extra_radius, 5.5 + 2.5 * extra_radius, 10], center = true);
 			translate([filament_diameter + 3, -nema17_width / 2 + 4, 0])
 				rotate([0, 90, 0])
 					cylinder(r = 3.15 + 2.5 * extra_radius, h = 2.5 + 3 * extra_radius, center = true, $fn = 6);
