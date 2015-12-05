@@ -21,7 +21,7 @@ module screw_socket() {
 module screw_socket_cone() {
   union() {
     screw_socket();
-    scale([1, 6, -1]) cylinder(r=4, h=4);
+    scale([1, 6, -1]) # cylinder(r=7, h=4);
   }
 }
 
@@ -73,9 +73,13 @@ module vertex(height, idler_offset, idler_space) {
         cylinder(r=roundness, h=1, center=true);
       }
       extrusion_cutout(height+10, 2*extra_radius);
-      for (z = [0:30:height]) {
+
+      for (z = [30:30:height]) {
         translate([0, -7.5-extra_radius, z+7.5-height/2]) rotate([90, 0, 0])
           screw_socket_cone();
+      }
+
+      for (z = [0:30:height]) {
         for (a = [-1, 1]) {
           rotate([0, 0, 30*a]) translate([-16*a, 111, z+7.5-height/2]) {
             // % rotate([90, 0, 0]) extrusion_cutout(200, 0);
