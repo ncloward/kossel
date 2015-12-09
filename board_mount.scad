@@ -33,6 +33,10 @@ module board_mount(h) {
   height = extrusion;
   extra = 3;
 
+  // Pads to improve print bed adhesion for slim ends.
+  translate([width/2, -length+32, 0]) cylinder(r=8, h=0.5);
+  translate([width/2, length-32, 0]) cylinder(r=8, h=0.5);
+
   difference() {
     union() {
       intersection() {
