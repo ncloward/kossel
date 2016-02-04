@@ -10,16 +10,6 @@ board_height = 2;
 board_mount_length = 151.638;
 board_mount_width = 67.564;
 
-module extrusion_cutout(h, extra) {
-  difference() {
-    cube([extrusion+extra, extrusion+extra, h], center=true);
-    for (a = [0:90:359]) rotate([0, 0, a]) {
-      translate([extrusion/2, 0, 0])
-        cube([6, 2.5, h+1], center=true);
-    }
-  }
-}
-
 module screw_socket() {
   cylinder(r=m3_wide_radius, h=20, center=true);
   translate([0, 0, 3.8]) cylinder(r=3.5, h=5);
