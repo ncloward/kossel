@@ -53,11 +53,14 @@ module breakout_mount(screw_seperation_length, screw_seperation_width) {
           }
         }
 
-        translate([56/2 + 15/2 - 5, 0, thickness/2]) {
-          cube([15, 46, thickness], center=true);
+        translate([0, 0, thickness/2]) {
+          minkowski() {
+            cube([12.5, 62, thickness/2], center=true);
+            cylinder(r=3, h=thickness/2, center=true);
+          }
 
-          translate([0, 0, -extrusion/2 - thickness/2]) rotate([90, 0, 0])
-            % extrusion_cutout(100, 0);
+          // translate([0, 0, -extrusion/2 - thickness/2]) rotate([90, 0, 0])
+          //  % extrusion_cutout(100, 0);
         }
       }
 
@@ -69,9 +72,9 @@ module breakout_mount(screw_seperation_length, screw_seperation_width) {
       }
     }
     union() {
-      translate([56/2 + 15/2 - 5, 0, thickness/2]) {
+      translate([0, 0, thickness/2]) {
         for (a = [1, -1]) {
-          translate([0, 35/2 * a, 0]) screw_socket();
+          translate([0, 29.5 * a, 0]) screw_socket();
         }
       }
 
@@ -86,5 +89,5 @@ module breakout_mount(screw_seperation_length, screw_seperation_width) {
   }
 }
 
-// color([.8, .5, .5, 0.8]) translate([0, 0, thickness+1]) breakout_board();
+// # color([.8, .5, .5, 0.8]) translate([0, 0, thickness+1]) breakout_board();
 translate([0, 0, 0]) rotate([0, 0, 0]) breakout_mount(40, 40);
