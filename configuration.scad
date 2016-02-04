@@ -2,6 +2,17 @@
 extra_radius = 0.1;
 
 // OD = outside diameter, corner to corner.
+m2_nut_od = 5.1;
+m2_nut_radius = m2_nut_od/2 + 0.2 + extra_radius;
+m2_nut_thickness = 2.4 + extra_radius;
+m2_washer_radius = 3.5 + extra_radius;
+
+// Major diameter of metric 2mm thread.
+m2_major = 1.85;
+m2_radius = m2_major/2 + extra_radius;
+m2_wide_radius = m2_major/2 + extra_radius + 0.2;
+
+// OD = outside diameter, corner to corner.
 m3_nut_od = 6.1;
 m3_nut_radius = m3_nut_od/2 + 0.2 + extra_radius;
 m3_nut_thickness = 2.4 + extra_radius;
