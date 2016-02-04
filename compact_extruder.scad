@@ -39,6 +39,13 @@ drive_gear_hobbed_offset = 3.2;
 drive_gear_length = 13;
 drive_gear_tooth_depth = 0.2;
 
+// MK7 drive gear
+drive_gear_outer_radius = 12.00 / 2;
+drive_gear_hobbed_radius = 11.00 / 2;
+drive_gear_hobbed_offset = 3;
+drive_gear_length = 11;
+drive_gear_tooth_depth = 0.2;
+
 // base width for frame plate
 base_width = 15;
 base_length = 42.3;
@@ -225,15 +232,17 @@ module filament_tunnel()
 			translate([filament_diameter + 1, -nema17_width / 2 + 4, .25])
 				rotate([0, 90, 0])
 					cylinder(r = m3_radius, h = 50, center = false, $fn = 32);
+      translate([filament_diameter + 3, -nema17_width / 2 + 4, 5])
+        cube([2.5 + 3 * extra_radius, 5.5 + 2.5 * extra_radius, 10], center = true);
 			translate([filament_diameter + 3, -nema17_width / 2 + 4, 0])
 				rotate([0, 90, 0])
 					cylinder(r = 3.15 + 2.5 * extra_radius, h = 2.5 + 3 * extra_radius, center = true, $fn = 6);
-			
+
 			// rounded corner
 			translate([-height - width / 2, 0, height / 2])
 				rotate([90, 0, 0])
 					cylinder(r = height, h = length + 2 * epsilon, center = true, $fn = 32);
-			
+
 			// funnnel inlet
 			if (inlet_type == 0)
 			{
@@ -432,7 +441,7 @@ module compact_extruder()
 				cylinder(r = filament_diameter / 2, h = 100, $fn = 16, center = true);
 }
 
-compact_extruder();
+scale([-1, 1, 1]) compact_extruder();
 /*translate([base_length, 0, 0])*/
   /*compact_extruder();*/
 /*translate([base_length*2, 0, 0])*/
@@ -440,5 +449,5 @@ compact_extruder();
 /*translate([base_length*3, 0, 0])*/
   /*compact_extruder();*/
 
-translate([base_length / 2, 0, 0])
+scale([-1, 1, 1]) translate([base_length / 2, 0, 0])
   idler_608();
