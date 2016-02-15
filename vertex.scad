@@ -26,11 +26,13 @@ module screw_socket_cone() {
   }
 }
 
-module vertex(height, idler_offset, idler_space) {
+module vertex(height, idler_offset, idler_space, ears=true, screw_spacing=30, screw_spacing_vertex=30) {
   union() {
-    // Pads to improve print bed adhesion for slim ends.
-    translate([-(37.5 + idler_offset/2), 52.2 + idler_offset, height/2-0.5]) cylinder(r=8, h=0.5);
-    translate([(37.5 + idler_offset/2), 52.2 + idler_offset, height/2-0.5]) cylinder(r=8, h=0.5);
+    if(ears) {
+      // Pads to improve print bed adhesion for slim ends.
+      translate([-(37.5 + idler_offset/2), 52.2 + idler_offset, height/2-0.5]) cylinder(r=8, h=0.5);
+      translate([(37.5 + idler_offset/2), 52.2 + idler_offset, height/2-0.5]) cylinder(r=8, h=0.5);
+    }
 
     difference() {
       union() {
@@ -76,23 +78,23 @@ module vertex(height, idler_offset, idler_space) {
       }
       extrusion_cutout(height+10, 2*extra_radius);
 
-      for (z = [0:30:height]) {
+      for (z = [0:screw_spacing_vertex:height]) {
         translate([0, -7.5-extra_radius, z+7.5-height/2]) rotate([90, 0, 0])
           screw_socket_cone();
       }
 
-      for (z = [0:30:height]) {
+      for (z = [0:screw_spacing:height]) {
         for (a = [-1, 1]) {
           rotate([0, 0, 30*a]) translate([-16*a, 111, z+7.5-height/2]) {
             // % rotate([90, 0, 0]) extrusion_cutout(200, 0);
             // Screw sockets.
-            for (y = [-88 + (idler_offset / 4) * 3, -44 + (idler_offset / 4) * 3]) {
+            for (y = [-90 + (idler_offset / 4) * 3, -44 + (idler_offset / 4) * 3]) {
               translate([a*7.5, y, 0]) rotate([0, a*90, 0]) screw_socket();
             }
             // Nut tunnels.
             for (z = [-1, 1]) {
               scale([1, 1, z]) translate([0, -100, 3]) minkowski() {
-                rotate([0, 0, -a*30]) cylinder(r=4, h=16, $fn=6);
+                rotate([0, 0, -a*30]) cylinder(r=4, h=height/2+1, $fn=6);
                 cube([0.1, 5, 0.1], center=true);
               }
             }

@@ -17,11 +17,16 @@ module frame_motor() {
 
     // Motor cable paths.
     for (mirror = [-1, 1]) scale([mirror, 1, 1]) {
-      translate([-32 - idler_offset / 2, 42 + idler_offset, 0]) rotate([0, 0, -30])
-        # cube([4, 15, 15], center=true);
+    }
+
+    // Motor cable paths.
+    for (mirror = [-1, 1]) scale([mirror, 1, 1]) {
+      translate([-35 - idler_offset / 2, 45 + idler_offset, 0]) rotate([0, 0, -30])
+         cube([4, 15, 15], center=true);
+      translate([-10 - idler_offset / 2, idler_offset, 0]) rotate([0, 0, 90])
+         cube([4, 15, 15], center=true);
       translate([-6, 0, -45]) cylinder(r=2.5, h=40);
-      translate([-11, 0, 0]) # cube([15, 4, 15], center=true);
-      translate([20,18, 0]) # cube([15, 4, 15], center=true);
+      translate([-11, 0, 0]) cube([15, 4, 15], center=true);
     }
 
     translate([0, motor_offset + idler_offset, 0]) {
@@ -39,4 +44,4 @@ module frame_motor() {
   }
 }
 
-translate([0, 0, 22.5]) frame_motor();
+rotate([0, 180, 0]) translate([0, 0, -22.5]) frame_motor();
