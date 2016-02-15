@@ -1,6 +1,7 @@
 include <configuration.scad>;
 
 use <vertex.scad>;
+use <microswitch.scad>;
 use <nema17.scad>;
 
 $fn = 24;
@@ -40,4 +41,26 @@ module frame_motor() {
   }
 }
 
+module endstop() {
+  thickness = 16;  // 1mm thicker than linear rail.
+  width = 15;  // Same as vertical extrusion.
+  height = 25;
+
+  difference() {
+    translate([0, 0, 0])
+      cube([width+2, thickness, height], center=true);
+    translate([0, -3-thickness/2, -height/2 + 15/4 + 2]) rotate([0, 180, 0]) {
+      % microswitch();
+      for (x = [-9.5/2, 9.5/2]) {
+        translate([x, 0, 0]) rotate([90, 0, 0])
+          cylinder(r=2.5/2, h=40, center=true, $fn=12);
+      }
+      translate([0, 8, -16]) rotate([-40, 0, 0])
+        cube([width+3, height+10, height/2], center=true);
+    }
+  }
+}
+
 rotate([0, 180, 0]) translate([0, 0, -22.5]) frame_motor();
+
+rotate([180, 0, 0]) translate([0, -15-6*extra_radius, -45 + 25/2]) endstop();
