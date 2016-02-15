@@ -9,7 +9,7 @@ idler_offset = 15;
 module frame_motor() {
   difference() {
     // No idler cones.
-    vertex(5*extrusion, idler_offset=idler_offset, idler_space=100);
+    vertex(3*extrusion, idler_offset=idler_offset, idler_space=100);
 
     // KOSSEL logotype.
     translate([20.5, -10, 0]) rotate([90, -90, 30])
@@ -17,10 +17,11 @@ module frame_motor() {
 
     // Motor cable paths.
     for (mirror = [-1, 1]) scale([mirror, 1, 1]) {
-      translate([-32 - idler_offset / 2, 42 + idler_offset, 0]) rotate([0, 0, -30]) # cube([4, 15, 45], center=true);
-      translate([-6, 0, 0]) cylinder(r=2.5, h=40);
-      translate([-11, 0, 15]) # cube([15, 4, 15], center=true);
-      translate([20,18, 0]) # cube([20, 4, 45], center=true);
+      translate([-32 - idler_offset / 2, 42 + idler_offset, 0]) rotate([0, 0, -30])
+        # cube([4, 15, 15], center=true);
+      translate([-6, 0, -45]) cylinder(r=2.5, h=40);
+      translate([-11, 0, 0]) # cube([15, 4, 15], center=true);
+      translate([20,18, 0]) # cube([15, 4, 15], center=true);
     }
 
     translate([0, motor_offset + idler_offset, 0]) {
@@ -36,17 +37,6 @@ module frame_motor() {
     }
     translate([0, motor_offset + idler_offset, 0]) rotate([90, 0, 0]) % nema17();
   }
-
-  translate([0, 0, -22.5]) difference() {
-    cube([16, 16, 30], center=true);
-
-    translate([0, -8.2, 0]) scale([1, 2.5, 1]) difference() {
-      cylinder(r=4, h=31, center=true);
-      translate([0, -2, 0])
-        cube([10, 4.2, 31], center=true);
-    }
-  }
-
 }
 
 translate([0, 0, 22.5]) frame_motor();

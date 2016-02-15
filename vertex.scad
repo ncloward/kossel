@@ -21,15 +21,17 @@ module screw_socket() {
 module screw_socket_cone() {
   union() {
     screw_socket();
-    scale([1, 6, -1]) # cylinder(r=7, h=4);
+    scale([1, 1, -1]) cylinder(r1=4, r2=7, h=4);
+//    scale([1, 6, -1]) # cylinder(r=7, h=4);
   }
 }
 
 module vertex(height, idler_offset, idler_space) {
   union() {
     // Pads to improve print bed adhesion for slim ends.
-    translate([-(37.5 + idler_offset/2), 52.2 + idler_offset, -height/2]) cylinder(r=8, h=0.5);
-    translate([(37.5 + idler_offset/2), 52.2 + idler_offset, -height/2]) cylinder(r=8, h=0.5);
+    translate([-(37.5 + idler_offset/2), 52.2 + idler_offset, height/2-0.5]) cylinder(r=8, h=0.5);
+    translate([(37.5 + idler_offset/2), 52.2 + idler_offset, height/2-0.5]) cylinder(r=8, h=0.5);
+
     difference() {
       union() {
         intersection() {
@@ -74,7 +76,7 @@ module vertex(height, idler_offset, idler_space) {
       }
       extrusion_cutout(height+10, 2*extra_radius);
 
-      for (z = [30:30:height]) {
+      for (z = [0:30:height]) {
         translate([0, -7.5-extra_radius, z+7.5-height/2]) rotate([90, 0, 0])
           screw_socket_cone();
       }
