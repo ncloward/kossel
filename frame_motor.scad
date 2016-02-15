@@ -17,10 +17,6 @@ module frame_motor() {
 
     // Motor cable paths.
     for (mirror = [-1, 1]) scale([mirror, 1, 1]) {
-    }
-
-    // Motor cable paths.
-    for (mirror = [-1, 1]) scale([mirror, 1, 1]) {
       translate([-35 - idler_offset / 2, 45 + idler_offset, 0]) rotate([0, 0, -30])
          cube([4, 15, 15], center=true);
       translate([-10 - idler_offset / 2, idler_offset, 0]) rotate([0, 0, 90])
